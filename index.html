@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FindMySpace.co - Launching Soon</title>
+     <link
+          rel="icon"
+          href="https://v0.dev/_next/image?url=https%3A%2F%2Fhebbkx1anhila5yf.public.blob.vercel-storage.com%2FFindMySpace-Con-Xe2jHrSCGkG2QOsML7hZQf7s47hP2L.png&w=1920&q=75"
+          type="image/png"
+        />
     <style>
         * {
             margin: 0;
@@ -63,21 +68,6 @@
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .logo::before {
-            content: '';
-            position: absolute;
-            inset: -20px;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            z-index: -10;
-        }
-
-        .logo:hover::before {
-            opacity: 1;
-        }
-
         .logo:hover {
             transform: translateY(-8px) scale(1.05);
         }
@@ -86,7 +76,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* filter: brightness(0) invert(1); */
             transition: filter 0.3s ease;
         }
 
@@ -340,12 +329,6 @@
         document.addEventListener('mouseleave', () => {
             const container = document.getElementById('container');
             container.style.transform = 'translate(0, 0)';
-        });
-
-        // Add some interactive sparkle effect on logo hover
-        const logo = document.querySelector('.logo');
-        logo.addEventListener('mouseenter', () => {
-            logo.style.filter = 'brightness(0) invert(1) drop-shadow(0 0 20px rgba(255,255,255,0.3))';
         });
 
         logo.addEventListener('mouseleave', () => {
