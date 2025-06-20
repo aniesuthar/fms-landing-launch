@@ -12,157 +12,228 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #E62A3F;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            background: linear-gradient(135deg, #E62A3F 0%, #d91e36 50%, #cc1b32 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            line-height: 1.6;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Modern background pattern */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .container {
             text-align: center;
-            max-width: 600px;
-            padding: 3rem 2rem;
-            animation: fadeIn 1.2s ease-out;
+            max-width: 700px;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container {
+            position: relative;
+            margin-bottom: 5rem;
+            animation: logoEntrance 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
         }
 
         .logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 4rem;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto;
+            position: relative;
+            background: white;
+            padding: 2px;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 50%;
             opacity: 0;
-            animation: slideUp 0.8s ease-out 0.2s forwards;
+            transition: opacity 0.6s ease;
+            z-index: -10;
+        }
+
+        .logo:hover::before {
+            opacity: 1;
+        }
+
+        .logo:hover {
+            transform: translateY(-8px) scale(1.05);
         }
 
         .logo img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: brightness(0) invert(1);
+            /* filter: brightness(0) invert(1); */
+            transition: filter 0.3s ease;
         }
 
-        h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 200;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
+        .main-title {
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            font-weight: 100;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleEntrance 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
             opacity: 0;
-            animation: slideUp 0.8s ease-out 0.4s forwards;
+            position: relative;
         }
 
-        .tagline {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
+        .brand-name {
+            font-size: clamp(1.4rem, 4vw, 2rem);
             font-weight: 300;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s forwards;
             opacity: 0;
-            animation: slideUp 0.8s ease-out 0.6s forwards;
         }
 
         .description {
-            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
             font-weight: 300;
-            opacity: 0.8;
+            line-height: 1.8;
+            opacity: 0.85;
             margin-bottom: 4rem;
-            max-width: 400px;
+            max-width: 480px;
             margin-left: auto;
             margin-right: auto;
+            animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.9s forwards;
             opacity: 0;
-            animation: slideUp 0.8s ease-out 0.8s forwards;
         }
 
-        .email-form {
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: slideUp 0.8s ease-out 1s forwards;
-        }
-
-        .input-group {
+        .services {
             display: flex;
-            max-width: 400px;
-            margin: 0 auto;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.2s forwards;
+            opacity: 0;
+        }
+
+        .service-item {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.8;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+        }
+
+        .service-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
+        }
+
+        .service-item:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .service-item:hover::after {
+            width: 100%;
+        }
+
+        .cta-section {
+            animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1.5s forwards;
+            opacity: 0;
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .launch-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            padding: 4px;
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            font-weight: 400;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .input-group:focus-within {
+        .launch-indicator:hover {
             background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.4);
             transform: translateY(-2px);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .email-input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            padding: 1rem 1.5rem;
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            font-weight: 300;
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
-        .email-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+        @keyframes logoEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
-        .submit-btn {
-            background: white;
-            color: #E62A3F;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 46px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-
-        .submit-btn:hover {
-            background: #f8f8f8;
-            transform: translateX(-2px);
-        }
-
-        .submit-btn:active {
-            transform: translateX(-2px) scale(0.98);
-        }
-
-        .footer {
-            font-size: 0.9rem;
-            opacity: 0.6;
-            font-weight: 300;
-            opacity: 0;
-            animation: slideUp 0.8s ease-out 1.2s forwards;
-        }
-
-        .success-message {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 1rem 1.5rem;
-            margin-top: 1rem;
-            backdrop-filter: blur(20px);
-            display: none;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes titleEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
         }
 
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(25px);
             }
             to {
                 opacity: 1;
@@ -170,31 +241,35 @@
             }
         }
 
-        @media (max-width: 640px) {
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: scale(1.2);
+            }
+        }
+
+        @media (max-width: 768px) {
             .container {
-                padding: 2rem 1.5rem;
+                padding: 3rem 1.5rem;
             }
 
             .logo {
-                width: 100px;
-                height: 100px;
-                margin-bottom: 3rem;
+                width: 120px;
+                height: 120px;
             }
 
-            .input-group {
+            .logo-container {
+                margin-bottom: 4rem;
+            }
+
+            .services {
                 flex-direction: column;
-                border-radius: 16px;
-                padding: 8px;
-            }
-
-            .email-input {
-                padding: 1rem;
-                text-align: center;
-            }
-
-            .submit-btn {
-                border-radius: 12px;
-                margin-top: 8px;
+                gap: 1.5rem;
+                align-items: center;
             }
 
             .description {
@@ -202,89 +277,79 @@
             }
         }
 
-        /* Subtle hover effect for the entire container */
-        .container:hover .logo {
-            transform: translateY(-2px);
-            transition: transform 0.3s ease;
+        @media (max-width: 480px) {
+            .services {
+                gap: 1rem;
+            }
+
+            .service-item {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Subtle mouse tracking effect */
+        .container {
+            transition: transform 0.1s ease-out;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FindMySpace-MEvQngkjXfTscTr7qSLVSf4SpY6XbI.png" alt="FindMySpace">
+    <div class="container" id="container">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/FindMySpace-MEvQngkjXfTscTr7qSLVSf4SpY6XbI.png" alt="FindMySpace">
+            </div>
         </div>
 
-        <h1>Coming Soon</h1>
+        <h1 class="main-title">Coming Soon</h1>
         
-        <p class="tagline">FindMySpace.co</p>
+        <p class="brand-name">FindMySpace.co</p>
         
         <p class="description">
-            Student housing made simple.<br>
-            Find your perfect space in Sikar.
+            The future of student housing in Sikar.<br>
+            Discover, compare, and book your perfect space.
         </p>
 
-        <form class="email-form" id="emailForm">
-            <div class="input-group">
-                <input 
-                    type="email" 
-                    class="email-input" 
-                    placeholder="Enter your email"
-                    required
-                    id="emailInput"
-                >
-                <button type="submit" class="submit-btn">
-                    Get Notified
-                </button>
-            </div>
-            <div class="success-message" id="successMessage">
-                ✓ Thank you! We'll notify you when we launch.
-            </div>
-        </form>
+        <div class="services">
+            <div class="service-item">Hostels</div>
+            <div class="service-item">PGs</div>
+            <div class="service-item">Mess</div>
+            <div class="service-item">Libraries</div>
+        </div>
 
-        <p class="footer">
-            Hostels • PGs • Mess • Libraries
-        </p>
+        <div class="cta-section">
+            <p class="cta-text">Something amazing is coming</p>
+            <div class="launch-indicator">
+                <div class="pulse-dot"></div>
+                <span>In Development</span>
+            </div>
+        </div>
     </div>
 
     <script>
-        document.getElementById('emailForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Subtle parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const container = document.getElementById('container');
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
             
-            const emailInput = document.getElementById('emailInput');
-            const successMessage = document.getElementById('successMessage');
-            const submitBtn = document.querySelector('.submit-btn');
-            
-            if (emailInput.value && emailInput.validity.valid) {
-                // Show success message
-                successMessage.style.display = 'block';
-                
-                // Clear input
-                emailInput.value = '';
-                
-                // Change button text temporarily
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Added!';
-                submitBtn.style.background = '#4ade80';
-                submitBtn.style.color = 'white';
-                
-                // Reset after 3 seconds
-                setTimeout(() => {
-                    successMessage.style.display = 'none';
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.background = 'white';
-                    submitBtn.style.color = '#E62A3F';
-                }, 3000);
-            }
+            container.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
         });
 
-        // Add subtle parallax effect on mouse move
-        document.addEventListener('mousemove', (e) => {
-            const container = document.querySelector('.container');
-            const x = (e.clientX / window.innerWidth) * 10 - 5;
-            const y = (e.clientY / window.innerHeight) * 10 - 5;
-            
-            container.style.transform = `translate(${x * 0.5}px, ${y * 0.5}px)`;
+        // Reset position when mouse leaves
+        document.addEventListener('mouseleave', () => {
+            const container = document.getElementById('container');
+            container.style.transform = 'translate(0, 0)';
+        });
+
+        // Add some interactive sparkle effect on logo hover
+        const logo = document.querySelector('.logo');
+        logo.addEventListener('mouseenter', () => {
+            logo.style.filter = 'brightness(0) invert(1) drop-shadow(0 0 20px rgba(255,255,255,0.3))';
+        });
+
+        logo.addEventListener('mouseleave', () => {
+            logo.style.filter = 'brightness(0) invert(1)';
         });
     </script>
 </body>
